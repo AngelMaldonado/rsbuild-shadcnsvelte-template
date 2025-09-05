@@ -69,6 +69,154 @@ curl -fsSL https://bun.sh/install | bash
 | `bun run check` | Run Biome linter and formatter |
 | `bun run format` | Format code with Biome |
 | `bun run svelte-check` | Run Svelte type checking |
+| `bun run commit` | Interactive commit with Commitizen |
+| `bun run release` | Create a new release with release-it |
+
+## 📝 Conventional Commits
+
+This template uses [Commitizen](https://commitizen.github.io/cz-cli/) with [cz-git](https://github.com/Zhengqbbb/cz-git) for conventional commits. This ensures consistent and meaningful commit messages.
+
+### Using Commitizen
+
+Instead of using `git commit`, use the interactive commit command:
+
+```bash
+# Interactive commit with Commitizen
+bun run commit
+```
+
+This will guide you through creating a conventional commit message with:
+
+- **Type**: feat, fix, docs, style, refactor, test, chore, etc.
+- **Scope**: The area of the codebase affected
+- **Description**: A clear description of the change
+- **Body**: Detailed explanation (optional)
+- **Footer**: Breaking changes or issue references (optional)
+
+### Commit Types
+
+| Type | Description |
+|------|-------------|
+| `feat` | A new feature |
+| `fix` | A bug fix |
+| `docs` | Documentation changes |
+| `style` | Code style changes (formatting, etc.) |
+| `refactor` | Code refactoring |
+| `test` | Adding or updating tests |
+| `chore` | Maintenance tasks |
+| `perf` | Performance improvements |
+| `ci` | CI/CD changes |
+| `build` | Build system changes |
+
+### Examples
+
+```bash
+# Feature commit
+feat(ui): add dark mode toggle
+
+# Bug fix
+fix(auth): resolve login redirect issue
+
+# Documentation
+docs(readme): update installation instructions
+
+# Breaking change
+feat(api)!: change user endpoint structure
+
+BREAKING CHANGE: The user API endpoint has been restructured
+```
+
+## 🚀 Automated Releases
+
+This template uses [release-it](https://github.com/release-it/release-it) for automated versioning and releases. It automatically bumps version numbers, creates git tags, and generates changelogs based on your conventional commits.
+
+### Using release-it
+
+Create a new release with the interactive release command:
+
+```bash
+# Interactive release process
+bun run release
+```
+
+This will:
+1. **Analyze commits** since the last release
+2. **Determine version bump** (patch, minor, or major)
+3. **Update version** in `package.json`
+4. **Generate changelog** from conventional commits
+5. **Create git tag** with the new version
+6. **Push changes** to your repository
+
+### Release Types
+
+release-it automatically determines the version bump based on your commit types:
+
+| Commit Type | Version Bump | Example |
+|-------------|--------------|---------|
+| `feat:` | Minor (0.1.0 → 0.2.0) | New features |
+| `fix:` | Patch (0.1.0 → 0.1.1) | Bug fixes |
+| `feat!:` or `BREAKING CHANGE` | Major (0.1.0 → 1.0.0) | Breaking changes |
+| Other types | Patch | Documentation, refactoring, etc. |
+
+### Release Options
+
+```bash
+# Dry run (preview what would happen)
+bun run release --dry-run
+
+# Force a specific version
+bun run release 1.2.3
+
+# Force a specific bump type
+bun run release --minor
+bun run release --major
+bun run release --patch
+
+# Skip git operations (useful for CI/CD)
+bun run release --no-git
+```
+
+### Pre-release Versions
+
+```bash
+# Create a pre-release version
+bun run release --pre-release=beta
+bun run release --pre-release=alpha
+
+# Examples: 1.0.0-beta.1, 1.0.0-alpha.2
+```
+
+### GitHub Integration
+
+If you have a GitHub repository, release-it can also:
+- Create GitHub releases
+- Upload assets
+- Generate release notes
+
+Configure this in your `package.json` or `.release-it.json`:
+
+```json
+{
+  "github": {
+    "release": true,
+    "releaseNotes": "generate-changelog"
+  }
+}
+```
+
+### Workflow Example
+
+```bash
+# 1. Make your changes
+git add .
+bun run commit  # Use conventional commits
+
+# 2. Create a release
+bun run release
+
+# 3. Push the release
+git push --follow-tags
+```
 
 ## 🏗️ Project Structure
 

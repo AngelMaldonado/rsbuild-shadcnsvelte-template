@@ -10,7 +10,9 @@
     "dev": "rsbuild dev --open",
     "format": "biome format --write",
     "preview": "rsbuild preview",
-    "svelte-check": "svelte-check --tsconfig ./tsconfig.json"
+    "svelte-check": "svelte-check --tsconfig ./tsconfig.json",
+    "commit": "cz",
+    "release": "release-it"
   },
   "dependencies": {
     "@lucide/svelte": "^0.542.0",
@@ -26,8 +28,15 @@
     "@rsbuild/plugin-svelte": "^1.0.11",
     "@tailwindcss/postcss": "^4.1.13",
     "@types/bun": "^1.2.21",
+    "cz-git": "^1.12.0",
+    "release-it": "^19.0.4",
     "svelte-check": "^4.3.1",
     "tailwindcss": "^4.1.13",
     "typescript": "^5.9.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-git"
+    }
   }
 }
