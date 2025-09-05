@@ -1,0 +1,17 @@
+# Local
+.DS_Store
+HOME/
+*.local
+*.log*
+
+# Dist
+node_modules
+dist/
+
+# Profile
+.rspack-profile-*/
+
+# IDE
+# .vscode/* # uncomment if you don't want to commit the vscode settings
+!.vscode/extensions.json
+.idea
